@@ -1,0 +1,15 @@
+{
+  "name": "fpsti-quiz",
+  "version": "1.0.0",
+  "description": "FPS Personality Type Indicator Quiz - Pure static HTML site",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static site, no build required'"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["fps", "quiz", "personality", "static", "html"],
+  "author": "",
+  "license": "MIT"
+}
