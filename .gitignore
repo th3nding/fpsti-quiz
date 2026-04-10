@@ -9,6 +9,7 @@
 !README.md
 !.gitignore
 !package.json
+!vercel.json
 
 # 排除 Wrangler/Cloudflare Workers 生成的文件
 wrangler.jsonc
