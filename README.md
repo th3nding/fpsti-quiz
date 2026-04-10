@@ -126,27 +126,69 @@ Cloudflare Pages 提供快速、全球分布的静态网站托管服务。以下
 - **`_redirects`**: 确保所有路由重定向到 `index.html`，支持单页应用
 - **`_headers`**: 优化缓存策略，提高加载速度
 
-### 故障排除
+### ⚠️ 重要：Cloudflare Pages 构建失败解决方案
 
-#### 构建失败问题
-如果之前构建失败，请检查以下配置：
+从构建日志看，Cloudflare Pages 错误地将项目识别为 **Cloudflare Workers** 项目（而不是静态 Pages），导致执行 `npx wrangler deploy` 命令并遇到文件大小限制。
 
-1. **移除 Node.js 依赖**：
-   - 项目已移除 `package.json` 和 `package-lock.json`，确保 Cloudflare Pages 不会尝试安装依赖
-   - 如果重新添加这些文件，构建可能会失败
+#### 🔧 问题分析
+- **错误命令**：Cloudflare Pages 执行 `npx wrangler deploy`（用于 Workers）
+- **正确命令**：应该直接部署静态文件（无构建步骤）
+- **根本原因**：项目在 Cloudflare Pages 中被错误配置为 "静态 Workers" 模式
 
-2. **正确构建设置**：
-   - **Framework preset**: 必须设置为 `None`
-   - **Build command**: 留空（不需要构建步骤）
-   - **Build output directory**: `/`（根目录）
+#### ✅ 解决方案一：删除并重新创建项目（推荐）
+1. **删除现有项目**：
+   - 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+   - 进入 Pages → 找到 `fpsti-quiz` 项目
+   - Settings → General → Delete project
 
-3. **重新部署**：
-   - 在 Cloudflare Pages 项目中，进入 **Settings** → **Builds & deployments**
-   - 点击 **Retry deployment** 或 **Clear cache & retry deploy**
+2. **重新创建项目**：
+   - Create a project → Connect to Git
+   - 选择仓库：`th3nding/fpsti-quiz`
+   - **关键配置**：
+     - **Framework preset**: `None`（必须选择此项）
+     - **Build command**: （留空，不要填写任何内容）
+     - **Build output directory**: `/`（根目录）
+   - 点击 Save and Deploy
 
-#### 文件大小限制
-- Cloudflare Workers 单个资源大小限制为 25 MiB
-- 本项目所有图片文件均小于此限制，可以正常部署
+3. **验证部署**：
+   - 构建日志应显示 "No build output detected to cache"
+   - 不应出现 "npx wrangler deploy"
+   - 访问 URL：`https://fpsti-quiz.pages.dev/`
+
+#### ✅ 解决方案二：手动上传文件（简单快捷）
+如果 Git 连接仍有问题，使用手动上传：
+
+1. **准备文件**：下载以下文件/文件夹：
+   - `index.html`
+   - `images/` 文件夹
+   - `_redirects` 文件
+   - `_headers` 文件
+
+2. **上传部署**：
+   - Cloudflare Dashboard → Pages → Create a project
+   - 选择 **Direct Upload**
+   - 拖入准备好的文件
+   - 点击 Deploy site
+
+#### ✅ 解决方案三：更新项目设置
+如果不想删除项目，尝试修改现有项目设置：
+
+1. **进入项目设置**：Settings → Builds & deployments
+2. **更新构建设置**：
+   - **Framework preset**: 改为 `None`
+   - **Build command**: 清空内容
+   - **Build output directory**: `/`
+3. **清除缓存**：点击 Clear cache & retry deploy
+
+#### 📋 项目已修复的内容
+1. **`package.json`**：添加了空 `deploy` 脚本，覆盖默认的 `wrangler deploy`
+2. **`.gitignore`**：排除 Wrangler/Workers 相关文件
+3. **配置完整**：`_redirects` 和 `_headers` 文件已就位
+
+#### 📞 技术支持
+如果以上方案均无效：
+- 检查 Cloudflare Pages 项目中的 "Functions" 设置，确保未启用
+- 联系 Cloudflare 支持，说明项目是纯静态 HTML，不需要 Workers 部署
 
 ### 自定义域名（可选）
 1. 在Pages项目设置中选择 **Custom domains**

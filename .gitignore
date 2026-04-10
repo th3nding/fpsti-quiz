@@ -9,3 +9,11 @@
 !README.md
 !.gitignore
 !package.json
+
+# 排除 Wrangler/Cloudflare Workers 生成的文件
+wrangler.jsonc
+.wrangler/
+node_modules/
+.DS_Store
+*.log
+*.tmp
