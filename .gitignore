@@ -1,0 +1,8 @@
+# 忽略所有文件
+/*
+
+# 只保留 quiz 相关文件
+!index.html
+!images/
+!README.md
+!.gitignore
