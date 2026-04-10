@@ -126,6 +126,28 @@ Cloudflare Pages 提供快速、全球分布的静态网站托管服务。以下
 - **`_redirects`**: 确保所有路由重定向到 `index.html`，支持单页应用
 - **`_headers`**: 优化缓存策略，提高加载速度
 
+### 故障排除
+
+#### 构建失败问题
+如果之前构建失败，请检查以下配置：
+
+1. **移除 Node.js 依赖**：
+   - 项目已移除 `package.json` 和 `package-lock.json`，确保 Cloudflare Pages 不会尝试安装依赖
+   - 如果重新添加这些文件，构建可能会失败
+
+2. **正确构建设置**：
+   - **Framework preset**: 必须设置为 `None`
+   - **Build command**: 留空（不需要构建步骤）
+   - **Build output directory**: `/`（根目录）
+
+3. **重新部署**：
+   - 在 Cloudflare Pages 项目中，进入 **Settings** → **Builds & deployments**
+   - 点击 **Retry deployment** 或 **Clear cache & retry deploy**
+
+#### 文件大小限制
+- Cloudflare Workers 单个资源大小限制为 25 MiB
+- 本项目所有图片文件均小于此限制，可以正常部署
+
 ### 自定义域名（可选）
 1. 在Pages项目设置中选择 **Custom domains**
 2. 添加你的域名并按照提示配置DNS
@@ -138,6 +160,7 @@ Cloudflare Pages 提供快速、全球分布的静态网站托管服务。以下
 - ✅ 更新图片路径：`人物/` → `images/`
 - ✅ 文本优化：更新类型名称和描述
 - ✅ 功能完善：确保所有16种类型计算逻辑正确
+- ✅ 优化Cloudflare Pages部署：移除package.json依赖，添加配置文件
 
 ### 主要修复内容
 1. **乱码修复**：解决UTF-8/GBK双重编码问题
