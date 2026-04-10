@@ -4,9 +4,10 @@
   "description": "FPS Personality Type Indicator Quiz - Pure static HTML site",
   "private": true,
   "scripts": {
-    "build": "echo 'Static site, no build required'",
-    "deploy": "echo 'Deployment handled by Cloudflare Pages, no wrangler needed'",
-    "preview": "echo 'Preview not available for static site'"
+    "build": "echo 'Static site, no build required' && exit 0",
+    "start": "echo 'Static HTML site - open index.html in browser' && exit 0",
+    "deploy": "echo 'Deployment handled by Cloudflare Pages, no wrangler needed' && exit 0",
+    "preview": "echo 'Preview not available for static site' && exit 0"
   },
   "engines": {
     "node": ">=18"
