@@ -4,5 +4,7 @@
 # 只保留 quiz 相关文件
 !index.html
 !images/
+!_redirects
+!_headers
 !README.md
 !.gitignore

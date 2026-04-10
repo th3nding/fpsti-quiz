@@ -6,6 +6,7 @@
 
 ### 主部署链接
 - **GitHub Pages (推荐)**：https://th3nding.github.io/fpsti-quiz/
+- **Cloudflare Pages**：https://fpsti-quiz.pages.dev/ (待部署)
 - **备用链接**：https://th3nding.github.io/fpsti-quiz/fpsti_quiz_lite.html
 - **Vercel部署**：https://fpsti-quiz.vercel.app/ (待重新配置)
 
@@ -64,6 +65,8 @@ fpsti-quiz/
 │   ├── 马枪怪.png
 │   ├── 转起来了.png
 │   └── 姜太公.png
+├── _redirects              # Cloudflare Pages重定向规则
+├── _headers                # Cloudflare Pages缓存头配置
 ├── .gitignore              # Git忽略文件
 └── README.md               # 本说明文件
 ```
@@ -84,9 +87,48 @@ fpsti-quiz/
 - ✅ 最新版本：使用 `index.html` 作为入口
 - ✅ 访问正常：https://th3nding.github.io/fpsti-quiz/
 
+### Cloudflare Pages
+- ⚠️ 待部署：需要连接GitHub仓库或上传文件
+- 📝 部署指南：见下方Cloudflare Pages部署说明
+
 ### Vercel
 - ⚠️ 待重新配置：中文文件夹名称可能导致部署问题
 - 🔄 建议：将 `人物` 文件夹重命名为 `images`（已完成）
+
+## 🚀 Cloudflare Pages 部署
+
+Cloudflare Pages 提供快速、全球分布的静态网站托管服务。以下是两种部署方式：
+
+### 方式一：通过GitHub仓库自动部署（推荐）
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 选择 **Pages** → **Create a project**
+3. 选择 **Connect to Git** → 授权访问GitHub账户
+4. 选择仓库：`th3nding/fpsti-quiz`
+5. 配置构建设置：
+   - **Framework preset**: `None`（纯静态站点）
+   - **Build command**: （留空，不需要构建）
+   - **Build output directory**: `/`（根目录）
+6. 点击 **Save and Deploy**
+7. 部署完成后，获得URL：`https://fpsti-quiz.pages.dev/`
+
+### 方式二：手动上传文件
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. 选择 **Pages** → **Create a project**
+3. 选择 **Direct Upload**
+4. 将以下文件/文件夹拖入上传区域：
+   - `index.html`
+   - `images/` 文件夹
+   - `_redirects` 文件（用于SPA路由）
+   - `_headers` 文件（用于缓存控制）
+5. 点击 **Deploy site**
+
+### 配置文件说明
+- **`_redirects`**: 确保所有路由重定向到 `index.html`，支持单页应用
+- **`_headers`**: 优化缓存策略，提高加载速度
+
+### 自定义域名（可选）
+1. 在Pages项目设置中选择 **Custom domains**
+2. 添加你的域名并按照提示配置DNS
 
 ## ✨ 最新更新
 
