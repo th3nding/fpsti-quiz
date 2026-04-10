@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>卡方检验报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: "宋体", SimSun, serif;
+            padding: 40px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 50px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        h2 {
+            font-size: 16px;
+            border-left: 4px solid #4472C4;
+            padding-left: 12px;
+            margin-top: 40px;
+            color: #2c3e50;
+        }
+        .summary-box {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .summary-item {
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .summary-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        .summary-value.significant {
+            color: #4472C4;
+        }
+        .summary-label {
+            font-size: 9pt;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10.5pt;
+        }
+        th, td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            font-weight: bold;
+            background: #fff;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+        }
+        tr:first-child th {
+            border-top: 2px solid #000;
+        }
+        tr:last-child td {
+            border-bottom: 2px solid #000;
+        }
+        .variable-name {
+            text-align: left;
+            font-weight: normal;
+        }
+        .note {
+            font-size: 9pt;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .significant-cell {
+            background: #f5f5f5 !important;
+            font-weight: bold;
+        }
+        .test-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #4472C4;
+        }
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .test-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .test-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .stat-box {
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4472C4;
+        }
+        .stat-label {
+            font-size: 9pt;
+            color: #666;
+            margin-top: 3px;
+        }
+        .contingency-table {
+            margin-top: 15px;
+            font-size: 10pt;
+        }
+        .contingency-table th {
+            background: #f5f5f5;
+        }
+        .effect-size {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 9pt;
+            font-weight: bold;
+        }
+        .effect-small { background: #fdebd0; color: #d35400; }
+        .effect-medium { background: #f9e79f; color: #f39c12; }
+        .effect-large { background: #e8f4fd; color: #2980b9; }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .chart-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .chart-title {
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 20px; }
+            .charts-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>守望先锋地图工坊模组数据 - 卡方检验报告</h1>
+        <p class="subtitle">Chi-Square Test Report for Overwatch Map Workshop Mods</p>
+        
+        <div class="summary-box">
+            <div style="font-size: 14px; font-weight: bold; margin-bottom: 15px;">📊 检验结果汇总</div>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-value">5</div>
+                    <div class="summary-label">检验总数</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value significant">5</div>
+                    <div class="summary-label">显著结果 (p < 0.05)</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value significant">3</div>
+                    <div class="summary-label">极显著 (p < 0.001)</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">0.345</div>
+                    <div class="summary-label">平均 Cramer's V</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value significant">中等效应</div>
+                    <div class="summary-label">平均效应量</div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>一、卡方检验结果总表</h2>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="variable-name">检验变量</th>
+                        <th>χ²</th>
+                        <th>df</th>
+                        <th>p 值</th>
+                        <th>Cramer's V</th>
+                        <th>效应量</th>
+                        <th>显著性</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr class="significant-cell">
+                        <td class="variable-name">类型 vs 技能修改程度</td>
+                        <td>34.960</td>
+                        <td>12</td>
+                        <td>< 0.001***</td>
+                        <td>0.341</td>
+                        <td><span class="effect-size effect-medium">中等</span></td>
+                        <td>✅ 显著</td>
+                    </tr>
+                    <tr class="significant-cell">
+                        <td class="variable-name">类型 vs 机制创新</td>
+                        <td>30.869</td>
+                        <td>12</td>
+                        <td>< 0.01**</td>
+                        <td>0.321</td>
+                        <td><span class="effect-size effect-medium">中等</span></td>
+                        <td>✅ 显著</td>
+                    </tr>
+                    <tr class="significant-cell">
+                        <td class="variable-name">类型 vs 视觉创新</td>
+                        <td>35.226</td>
+                        <td>12</td>
+                        <td>< 0.001***</td>
+                        <td>0.343</td>
+                        <td><span class="effect-size effect-medium">中等</span></td>
+                        <td>✅ 显著</td>
+                    </tr>
+                    <tr class="significant-cell">
+                        <td class="variable-name">类型 vs 叙事创新</td>
+                        <td>44.787</td>
+                        <td>12</td>
+                        <td>< 0.001***</td>
+                        <td>0.386</td>
+                        <td><span class="effect-size effect-large">较大</span></td>
+                        <td>✅ 显著</td>
+                    </tr>
+                    <tr class="significant-cell">
+                        <td class="variable-name">类型 vs 地图物件来源</td>
+                        <td>33.045</td>
+                        <td>12</td>
+                        <td>< 0.01**</td>
+                        <td>0.332</td>
+                        <td><span class="effect-size effect-medium">中等</span></td>
+                        <td>✅ 显著</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note">
+                注：*** p < 0.001, ** p < 0.01, * p < 0.05；效应量判断标准：Cramer's V > 0.35 为较大效应，0.25-0.35 为中等效应，< 0.25 为较小效应
+            </div>
+        </div>
+        
+        <h2>二、详细检验结果</h2>
+        
+        
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-title">检验1: 类型 vs 技能修改程度</div>
+                <span class="effect-size effect-medium">效应量：中等 (V = 0.341)</span>
+            </div>
+            
+            <div class="test-stats">
+                <div class="stat-box">
+                    <div class="stat-value">34.960</div>
+                    <div class="stat-label">卡方值 (χ²)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">自由度 (df)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #27ae60">< 0.001***</div>
+                    <div class="stat-label">p 值</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">0.341</div>
+                    <div class="stat-label">Cramer's V</div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="contingency-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 15%;">类型</th>
+                            <th colspan="5">创新评分</th>
+                            <th rowspan="2">合计</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td class="variable-name">娱乐</td>
+                            <td>6</td><td>16</td><td>4</td><td>9</td><td>5</td>
+                            <td><strong>40</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">竞技</td>
+                            <td>6</td><td>9</td><td>5</td><td>4</td><td>1</td>
+                            <td><strong>25</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">技能</td>
+                            <td>12</td><td>7</td><td>1</td><td>0</td><td>0</td>
+                            <td><strong>20</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">叙事</td>
+                            <td>2</td><td>2</td><td>1</td><td>9</td><td>1</td>
+                            <td><strong>15</strong></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: #f5f5f5;">
+                            <td class="variable-name">合计</td>
+                            <td>26</td><td>34</td><td>11</td><td>22</td><td>7</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-title">检验2: 类型 vs 机制创新</div>
+                <span class="effect-size effect-medium">效应量：中等 (V = 0.321)</span>
+            </div>
+            
+            <div class="test-stats">
+                <div class="stat-box">
+                    <div class="stat-value">30.869</div>
+                    <div class="stat-label">卡方值 (χ²)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">自由度 (df)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #27ae60">< 0.01**</div>
+                    <div class="stat-label">p 值</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">0.321</div>
+                    <div class="stat-label">Cramer's V</div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="contingency-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 15%;">类型</th>
+                            <th colspan="5">创新评分</th>
+                            <th rowspan="2">合计</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td class="variable-name">娱乐</td>
+                            <td>4</td><td>7</td><td>17</td><td>9</td><td>3</td>
+                            <td><strong>40</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">竞技</td>
+                            <td>1</td><td>10</td><td>8</td><td>4</td><td>2</td>
+                            <td><strong>25</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">技能</td>
+                            <td>6</td><td>9</td><td>2</td><td>2</td><td>1</td>
+                            <td><strong>20</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">叙事</td>
+                            <td>1</td><td>1</td><td>3</td><td>5</td><td>5</td>
+                            <td><strong>15</strong></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: #f5f5f5;">
+                            <td class="variable-name">合计</td>
+                            <td>12</td><td>27</td><td>30</td><td>20</td><td>11</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-title">检验3: 类型 vs 视觉创新</div>
+                <span class="effect-size effect-medium">效应量：中等 (V = 0.343)</span>
+            </div>
+            
+            <div class="test-stats">
+                <div class="stat-box">
+                    <div class="stat-value">35.226</div>
+                    <div class="stat-label">卡方值 (χ²)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">自由度 (df)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #27ae60">< 0.001***</div>
+                    <div class="stat-label">p 值</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">0.343</div>
+                    <div class="stat-label">Cramer's V</div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="contingency-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 15%;">类型</th>
+                            <th colspan="5">创新评分</th>
+                            <th rowspan="2">合计</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td class="variable-name">娱乐</td>
+                            <td>8</td><td>10</td><td>14</td><td>8</td><td>0</td>
+                            <td><strong>40</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">竞技</td>
+                            <td>12</td><td>7</td><td>3</td><td>3</td><td>0</td>
+                            <td><strong>25</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">技能</td>
+                            <td>6</td><td>11</td><td>1</td><td>2</td><td>0</td>
+                            <td><strong>20</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">叙事</td>
+                            <td>0</td><td>4</td><td>7</td><td>2</td><td>2</td>
+                            <td><strong>15</strong></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: #f5f5f5;">
+                            <td class="variable-name">合计</td>
+                            <td>26</td><td>32</td><td>25</td><td>15</td><td>2</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-title">检验4: 类型 vs 叙事创新</div>
+                <span class="effect-size effect-large">效应量：较大 (V = 0.386)</span>
+            </div>
+            
+            <div class="test-stats">
+                <div class="stat-box">
+                    <div class="stat-value">44.787</div>
+                    <div class="stat-label">卡方值 (χ²)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">自由度 (df)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #27ae60">< 0.001***</div>
+                    <div class="stat-label">p 值</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">0.386</div>
+                    <div class="stat-label">Cramer's V</div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="contingency-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 15%;">类型</th>
+                            <th colspan="5">创新评分</th>
+                            <th rowspan="2">合计</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td class="variable-name">娱乐</td>
+                            <td>8</td><td>6</td><td>8</td><td>9</td><td>9</td>
+                            <td><strong>40</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">竞技</td>
+                            <td>13</td><td>3</td><td>4</td><td>3</td><td>2</td>
+                            <td><strong>25</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">技能</td>
+                            <td>17</td><td>0</td><td>1</td><td>1</td><td>1</td>
+                            <td><strong>20</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">叙事</td>
+                            <td>1</td><td>0</td><td>1</td><td>5</td><td>8</td>
+                            <td><strong>15</strong></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: #f5f5f5;">
+                            <td class="variable-name">合计</td>
+                            <td>39</td><td>9</td><td>14</td><td>18</td><td>20</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="test-card">
+            <div class="test-header">
+                <div class="test-title">检验5: 类型 vs 地图物件来源</div>
+                <span class="effect-size effect-medium">效应量：中等 (V = 0.332)</span>
+            </div>
+            
+            <div class="test-stats">
+                <div class="stat-box">
+                    <div class="stat-value">33.045</div>
+                    <div class="stat-label">卡方值 (χ²)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">自由度 (df)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" style="color: #27ae60">< 0.01**</div>
+                    <div class="stat-label">p 值</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">0.332</div>
+                    <div class="stat-label">Cramer's V</div>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table class="contingency-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 15%;">类型</th>
+                            <th colspan="5">创新评分</th>
+                            <th rowspan="2">合计</th>
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                            <td class="variable-name">娱乐</td>
+                            <td>11</td><td>12</td><td>11</td><td>5</td><td>1</td>
+                            <td><strong>40</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">竞技</td>
+                            <td>12</td><td>8</td><td>4</td><td>1</td><td>0</td>
+                            <td><strong>25</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">技能</td>
+                            <td>16</td><td>4</td><td>0</td><td>0</td><td>0</td>
+                            <td><strong>20</strong></td>
+                        </tr>
+                        <tr>
+                            <td class="variable-name">叙事</td>
+                            <td>1</td><td>4</td><td>6</td><td>2</td><td>2</td>
+                            <td><strong>15</strong></td>
+                        </tr>
+                        <tr style="font-weight: bold; background: #f5f5f5;">
+                            <td class="variable-name">合计</td>
+                            <td>40</td><td>28</td><td>21</td><td>8</td><td>3</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <h2>三、效应量可视化</h2>
+        
+        <div class="charts-grid">
+            <div class="chart-container">
+                <div class="chart-title">图 1. 各检验 Cramer's V 效应量对比</div>
+                <canvas id="effectSizeChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">图 2. 卡方值对比</div>
+                <canvas id="chiSquareChart"></canvas>
+            </div>
+        </div>
+        
+        <h2>四、主要发现与解释</h2>
+        
+        <div style="background: #f8f9fa; padding: 25px; border-left: 4px solid #4472C4; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #2c3e50;">📌 核心发现</h3>
+            
+            <div style="margin: 15px 0;">
+                <strong>1. 所有检验均达到显著水平:</strong>
+                <ul>
+                    <li>5 个卡方检验的 p 值均 < 0.05，表明模组类型与各创新维度之间存在显著关联</li>
+                    <li>3 个检验达到 p < 0.001 的极显著水平</li>
+                    <li>所有效应量均为中等到较大 (Cramer's V = 0.32-0.39)</li>
+                </ul>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>2. 最强的关联：类型 vs 叙事创新 (χ² = 44.79, p < 0.001, V = 0.386)</strong>
+                <ul>
+                    <li>叙事类模组在叙事创新上得分明显更高 (5 分占比 53.3%)</li>
+                    <li>技能类模组在叙事创新上得分最低 (1 分占比 85%)</li>
+                    <li>娱乐类模组叙事创新分布较为均匀</li>
+                </ul>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>3. 类型 vs 视觉创新 (χ² = 35.23, p < 0.001, V = 0.343)</strong>
+                <ul>
+                    <li>竞技类模组视觉创新得分偏低 (1-2 分占比 76%)</li>
+                    <li>娱乐类模组视觉创新集中在中等水平 (2-3 分占比 60%)</li>
+                    <li>叙事类模组视觉创新分布较分散</li>
+                </ul>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>4. 类型 vs 技能修改程度 (χ² = 34.96, p < 0.001, V = 0.341)</strong>
+                <ul>
+                    <li>技能类模组技能修改程度得分最低 (1-2 分占比 95%)</li>
+                    <li>娱乐类模组技能修改程度分布最广 (1-5 分均有)</li>
+                    <li>叙事类模组在技能修改上呈现两极分化</li>
+                </ul>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>5. 类型 vs 机制创新 (χ² = 30.87, p < 0.01, V = 0.321)</strong>
+                <ul>
+                    <li>娱乐类模组机制创新得分最高 (3-5 分占比 72.5%)</li>
+                    <li>技能类模组机制创新得分偏低 (1-2 分占比 75%)</li>
+                </ul>
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>6. 类型 vs 地图物件来源 (χ² = 33.05, p < 0.01, V = 0.332)</strong>
+                <ul>
+                    <li>技能类模组主要使用官方素材 (1 分占比 80%)</li>
+                    <li>叙事类模组在物件来源上更加多样化</li>
+                    <li>娱乐类模组物件来源分布较为均匀</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="background: #f8f9fa; padding: 25px; border-left: 4px solid #4472C4; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #2c3e50;">📊 统计结论</h3>
+            <p style="margin: 10px 0;">
+                <strong>研究假设验证：</strong> 数据分析结果支持研究假设——不同类型的守望先锋地图工坊模组在文化盗猎行为的各个维度上存在显著差异。
+                娱乐类和叙事类模组在多个创新维度上表现更为活跃，而技能类模组则更倾向于使用官方素材和保持原有游戏机制。
+                这一发现为理解游戏模组社区的文化生产模式提供了实证支持。
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // 效应量对比图
+        const ctx1 = document.getElementById('effectSizeChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ["技能修改程度","机制创新","视觉创新","叙事创新","地图物件来源"],
+                datasets: [{
+                    label: 'Cramer\'s V',
+                    data: [0.341,0.321,0.343,0.386,0.332],
+                    backgroundColor: ['#4472C4', '#ED7D31', '#A5A5A5', '#FFC000', '#5B9BD5']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true, max: 0.5, title: { display: true, text: '效应量' } }
+                },
+                plugins: {
+                    legend: { display: false },
+                    annotation: {
+                        annotations: {
+                            line1: { type: 'line', yMin: 0.25, yMax: 0.25, borderColor: 'rgba(243, 156, 18, 0.8)', borderWidth: 2, borderDash: [5, 5] },
+                            line2: { type: 'line', yMin: 0.35, yMax: 0.35, borderColor: 'rgba(39, 174, 96, 0.8)', borderWidth: 2, borderDash: [5, 5] }
+                        }
+                    }
+                }
+            }
+        });
+        
+        // 卡方值对比图
+        const ctx2 = document.getElementById('chiSquareChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ["技能修改程度","机制创新","视觉创新","叙事创新","地图物件来源"],
+                datasets: [{
+                    label: '卡方值',
+                    data: [34.96,30.869,35.226,44.787,33.045],
+                    backgroundColor: ['#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', '#3498db']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'χ²值' } }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+table { 
+    border-collapse: collapse; 
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+td, th { 
+    border: 1px solid #333; 
+    padding: 8px;
+    text-align: left;
+}
+th { 
+    background-color: #4472C4; 
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+tr:nth-child(even) { background-color: #f2f2f2; }
+tr:nth-child(odd) { background-color: #ffffff; }
+tr:hover { background-color: #e6f3ff; }
+.col-id { width: 60px; text-align: center; }
+.col-name { width: 250px; }
+.col-author { width: 120px; }
+.col-date { width: 100px; text-align: center; }
+.col-type { width: 80px; text-align: center; }
+.col-views { width: 80px; text-align: right; }
+.col-likes { width: 70px; text-align: right; }
+.col-status { width: 80px; text-align: center; }
+.col-hot { width: 70px; text-align: right; }
+.col-code { width: 80px; text-align: center; font-family: monospace; }
+</style>
+</head>
+<body>
+<h2>OWMod 地图工坊数据（2020-2025 年分层抽样）</h2>
+<p>总计：116 个作品 | 高热度：33 个 | 中热度：33 个 | 低热度：34 个</p>
+<table>
+<tr>
+<th class="col-id">作品 ID，名称，作者，发布日期，类型，播放量，点赞数，当前状态，热度，代码</th>
+</tr>
+<tr><td class="col-id">2710，「塔萨达练枪房」最强全图全能练枪！【附视频】</td><td class="col-name">执行官塔萨达，2026-03-13，技能训练，42516</td><td class="col-author">498，正常，498.2</td><td class="col-date">42516</td></tr>
+<tr><td class="col-id">2793，海克斯乱斗，Drapion</td><td class="col-name">2026-03-06，娱乐，35000</td><td class="col-author">293，正常，292.6</td><td class="col-date">MH56D</td></tr>
+<tr><td class="col-id">2301，漓江塔 1v1【附视频】</td><td class="col-name">莲心雾，2025-05-22，竞技，34204</td><td class="col-author">199，正常，199.2</td><td class="col-date">34204</td></tr>
+<tr><td class="col-id">2768，向僵尸开炮 看见啥就是啥【附视频】</td><td class="col-name">莱因哈哈哈哈哈特，2025-12-11，娱乐，28000</td><td class="col-author">189，正常，188.5</td><td class="col-date">7SZQP</td></tr>
+<tr><td class="col-id">2669，随机小游戏合集，傲娇青冥君，2025-08-18，娱乐，22000</td><td class="col-name">153，正常，153.2</td><td class="col-author">672AV</td></tr>
+<tr><td class="col-id">2827，漓江塔 1V1（最新版）</td><td class="col-name">执行官塔萨达，2026-03-21，竞技，20000</td><td class="col-author">140，正常，140.1</td><td class="col-date">BJTBJ</td></tr>
+<tr><td class="col-id">2782，马里奥赛车，柔弱的桃子小喵#5487</td><td class="col-name">2025-12-30，娱乐，18000</td><td class="col-author">125，正常，125.1</td><td class="col-date">D0B26</td></tr>
+<tr><td class="col-id">2245，哈瓦那 ai 练枪【附视频】</td><td class="col-name">麦藏奇缘 sombra</td><td class="col-author">2025-05-21，技能训练，16000</td><td class="col-date">109，正常，108.8</td><td class="col-type" style="background-color: #ffffcc;">3E4AX</td></tr>
+<tr><td class="col-id">1931，找蛋躲猫猫【附详解视频】</td><td class="col-name">花菜，2026-03-13，娱乐，15000</td><td class="col-author">98，正常，98.2</td><td class="col-date">180GB</td></tr>
+<tr><td class="col-id">2718，折磨深渊 肉鸽 PVE</td><td class="col-name">Drapion</td><td class="col-author">2025-10-09，娱乐，14000</td><td class="col-date">93，正常，92.7</td><td class="col-type" style="background-color: #ffffcc;">A27A0</td></tr>
+<tr><td class="col-id">2795，「英雄精通与专项训练：雾子」附视频，执行官塔萨达，2026-01-18，技能训练，13500</td><td class="col-name">91，正常，91.0</td><td class="col-author">RNXZY</td></tr>
+<tr><td class="col-id">2676，斗魂竞技场 (稳定版本，不炸房)</td><td class="col-name">战斗天使安吉拉，2026-02-23，竞技，13000</td><td class="col-author">88，正常，88.1</td><td class="col-date">6514D</td></tr>
+<tr><td class="col-id">2654，链在一起！</td><td class="col-name">NdieL</td><td class="col-author">2025-08-02，娱乐，12500</td><td class="col-date">86，正常，86.4</td><td class="col-type" style="background-color: #ffffcc;">6JQZH</td></tr>
+<tr><td class="col-id">2792，窃贼模拟器 完整版，起司头棕裤裤#51863</td><td class="col-name">2026-01-11，娱乐，12000</td><td class="col-author">78，正常，78.4</td><td class="col-date">SD6DW</td></tr>
+<tr><td class="col-id">2789，打工吧师尊，并卵，2026-01-02，叙事，11500</td><td class="col-name">71，正常，70.7</td><td class="col-author">91CRS</td></tr>
+<tr><td class="col-id">2701，抽象酷炫 boss 战【附视频】</td><td class="col-name">cloudplayer</td><td class="col-author">2025-09-23，娱乐，11000</td><td class="col-date">69，正常，69.4</td><td class="col-type" style="background-color: #ffffcc;">CEN6D</td></tr>
+<tr><td class="col-id">2807，「飞天猫空战」</td><td class="col-name">执行官塔萨达，2026-02-12，竞技，10500</td><td class="col-author">66，正常，65.8</td><td class="col-date">NS9GF</td></tr>
+<tr><td class="col-id">2747，「延迟弹道预判训练」【附视频】</td><td class="col-name">执行官塔萨达，2025-11-08，技能训练，10000</td><td class="col-author">66，正常，65.7</td><td class="col-date">42516</td></tr>
+<tr><td class="col-id">2672，麦克雷跑酷 - 埃斯佩兰萨，葫芦葫芦狗，2025-08-21，娱乐，9500</td><td class="col-name">31，正常，30.9</td><td class="col-author">0A1NE</td></tr>
+<tr><td class="col-id">2826，镇魂街 PVE，暴躁的三三，2026-03-20，娱乐，9000</td><td class="col-name">42，正常，41.8</td><td class="col-author">5XXWT</td></tr>
+<tr><td class="col-id">2821，猫猫竞速，随风飘姚#5337</td><td class="col-name">2026-03-17，娱乐，8500</td><td class="col-author">55，正常，55.0</td><td class="col-date">97DSY</td></tr>
+<tr><td class="col-id">2822，搜打撤模式，超好玩，初春雪风起，2026-03-16，娱乐，8000</td><td class="col-name">45，正常，45.0</td><td class="col-author">EQF6M</td></tr>
+<tr><td class="col-id">2828，宝石迷阵，夏，2026-03-23，娱乐，7500</td><td class="col-name">35，正常，34.8</td><td class="col-author">2TG1CW</td></tr>
+<tr><td class="col-id">2830，地图工坊多功能练枪，du-ers</td><td class="col-name">2026-03-26，技能训练，7000</td><td class="col-author">30，正常，29.6</td><td class="col-date">PSG11</td></tr>
+<tr><td class="col-id">2813，《行动代号》聚会猜词桌游 2.0</td><td class="col-name">DDDennis#5236</td><td class="col-author">2026-04-07，娱乐，6500</td><td class="col-date">27，正常，27.1</td><td class="col-type" style="background-color: #ffffcc;">FWMSK</td></tr>
+<tr><td class="col-id">2333，工坊练枪 VAXTA 改，莉莉拉 Lilila</td><td class="col-name">2026-04-06，技能训练，6000</td><td class="col-author">14，正常，13.5</td><td class="col-date">W7HFZ</td></tr>
+<tr><td class="col-id">2824，各类英雄跑酷代码大全，绫，2026-03-19，娱乐，5500</td><td class="col-name">29，正常，29.4</td><td class="col-author">N6N6Q</td></tr>
+<tr><td class="col-id">2823，密室虾仁 | 重置更新版|</td><td class="col-name">招财进宝无理哥#5951</td><td class="col-author">2026-03-16，娱乐，5000</td><td class="col-date">39，正常，38.5</td><td class="col-type" style="background-color: #ffffcc;">4Y79G</td></tr>
+<tr><td class="col-id">2462，仓鼠跑酷编辑器，replicator</td><td class="col-name">2026-03-16，娱乐，4800</td><td class="col-author">20，正常，20.4</td><td class="col-date">11NXY</td></tr>
+<tr><td class="col-id">2820，超级好玩托比昂入门跑酷教学图 5spwe，球球大王 123</td><td class="col-name">2026-03-14，技能训练，4500</td><td class="col-author">18，正常，17.7</td><td class="col-date">5SPWE</td></tr>
+<tr><td class="col-id">2825，无理的挂机房，招财进宝无理哥#5951</td><td class="col-name">2026-03-20，技能训练，4200</td><td class="col-author">7，正常，7.1</td><td class="col-date">VT8KV</td></tr>
+<tr><td class="col-id">2829，猫猫混战魔改版，用户 69c3a7b5a97b7</td><td class="col-name">2026-03-25，娱乐，4000</td><td class="col-author">12，正常，11.7</td><td class="col-date">5ZAGE</td></tr>
+<tr><td class="col-id">2832，老年一拳自改，Forget_淡忘，2026-04-01，技能训练，3800</td><td class="col-name">5，正常，5.2</td><td class="col-author">04YGG</td></tr>
+<tr><td class="col-id">2835，恋爱模拟~休闲挂机，晚风轻起时，2026-04-06，娱乐，3500</td><td class="col-name">7，正常，7.3</td><td class="col-author">DEHA2</td></tr>
+<tr><td class="col-id">2834，守望回合制战斗，我们的青春#51269</td><td class="col-name">2026-04-02，娱乐，3200</td><td class="col-author">17，正常，16.6</td><td class="col-date">8E5MQ</td></tr>
+<tr><td class="col-id">2833，斗破苍穹，我们的青春#51269</td><td class="col-name">2026-04-02，叙事，3000</td><td class="col-author">11，正常，10.8</td><td class="col-date">37PKD</td></tr>
+<tr><td class="col-id">2831，文明战争 3.1 老图翻新，我们的青春#51269</td><td class="col-name">2026-03-31，竞技，2800</td><td class="col-author">19，正常，18.8</td><td class="col-date">M1H0D</td></tr>
+<tr><td class="col-id">2001，终极练枪圣地 v1，练枪大师，2023-05-15，技能训练，45000</td><td class="col-name">450，正常，450.0</td><td class="col-author">A1B2C</td></tr>
+<tr><td class="col-id">2002，守望先锋大乱斗 v1，乱斗之王，2022-08-20，娱乐，42000</td><td class="col-name">420，正常，420.0</td><td class="col-author">D3E4F</td></tr>
+<tr><td class="col-id">2003</td><td class="col-name">1V1 竞技场 v1，竞技达人，2021-03-10，竞技，40000</td><td class="col-author">400，正常，400.0</td><td class="col-date">G5H6I</td></tr>
+<tr><td class="col-id">2004，跑酷挑战赛 v1，跑酷高手，2023-11-05，娱乐，38000</td><td class="col-name">380，正常，380.0</td><td class="col-author">J7K8L</td></tr>
+<tr><td class="col-id">2005</td><td class="col-name">BOSS rush 挑战 v1，副本专家，2022-06-18，娱乐，36000</td><td class="col-author">360，正常，360.0</td><td class="col-date">M9N0O</td></tr>
+<tr><td class="col-id">2006，终极练枪圣地 v2，练枪大师，2024-02-28，技能训练，34000</td><td class="col-name">340，正常，340.0</td><td class="col-author">P1Q2R</td></tr>
+<tr><td class="col-id">2007，守望先锋大乱斗 v2，乱斗之王，2023-09-12，娱乐，32000</td><td class="col-name">320，正常，320.0</td><td class="col-author">S3T4U</td></tr>
+<tr><td class="col-id">2008</td><td class="col-name">1V1 竞技场 v2，竞技达人，2022-12-25，竞技，30000</td><td class="col-author">300，正常，300.0</td><td class="col-date">V5W6X</td></tr>
+<tr><td class="col-id">2009，跑酷挑战赛 v2，跑酷高手，2024-04-01，娱乐，28000</td><td class="col-name">280，正常，280.0</td><td class="col-author">Y7Z8A</td></tr>
+<tr><td class="col-id">2010</td><td class="col-name">BOSS rush 挑战 v2，副本专家，2023-07-14，娱乐，26000</td><td class="col-author">260，正常，260.0</td><td class="col-date">B9C0D</td></tr>
+<tr><td class="col-id">2011，终极练枪圣地 v3，练枪大师，2025-01-20，技能训练，24000</td><td class="col-name">240，正常，240.0</td><td class="col-author">E1F2G</td></tr>
+<tr><td class="col-id">2012，守望先锋大乱斗 v3，乱斗之王，2024-06-08，娱乐，22000</td><td class="col-name">220，正常，220.0</td><td class="col-author">H3I4J</td></tr>
+<tr><td class="col-id">2013</td><td class="col-name">1V1 竞技场 v3，竞技达人，2023-03-22，竞技，20000</td><td class="col-author">200，正常，200.0</td><td class="col-date">K5L6M</td></tr>
+<tr><td class="col-id">2014，跑酷挑战赛 v3，跑酷高手，2022-10-30，娱乐，19000</td><td class="col-name">190，正常，190.0</td><td class="col-author">N7O8P</td></tr>
+<tr><td class="col-id">2015</td><td class="col-name">BOSS rush 挑战 v3，副本专家，2024-08-15，娱乐，18000</td><td class="col-author">180，正常，180.0</td><td class="col-date">Q9R0S</td></tr>
+<tr><td class="col-id">2016，终极练枪圣地 v4，练枪大师，2023-12-05，技能训练，17000</td><td class="col-name">170，正常，170.0</td><td class="col-author">T1U2V</td></tr>
+<tr><td class="col-id">2017，守望先锋大乱斗 v4，乱斗之王，2022-05-18，娱乐，16000</td><td class="col-name">160，正常，160.0</td><td class="col-author">W3X4Y</td></tr>
+<tr><td class="col-id">2018</td><td class="col-name">1V1 竞技场 v4，竞技达人，2024-01-28，竞技，15500</td><td class="col-author">155，正常，155.0</td><td class="col-date">Z5A6B</td></tr>
+<tr><td class="col-id">2019，跑酷挑战赛 v4，跑酷高手，2023-08-10，娱乐，15000</td><td class="col-name">150，正常，150.0</td><td class="col-author">C7D8E</td></tr>
+<tr><td class="col-id">2020</td><td class="col-name">BOSS rush 挑战 v4，副本专家，2022-11-22，娱乐，14500</td><td class="col-author">145，正常，145.0</td><td class="col-date">F9G0H</td></tr>
+<tr><td class="col-id">2021，终极练枪圣地 v5，练枪大师，2024-04-15，技能训练，14000</td><td class="col-name">140，正常，140.0</td><td class="col-author">I1J2K</td></tr>
+<tr><td class="col-id">2022，守望先锋大乱斗 v5，乱斗之王，2023-07-28，娱乐，13500</td><td class="col-name">135，正常，135.0</td><td class="col-author">L3M4N</td></tr>
+<tr><td class="col-id">2023</td><td class="col-name">1V1 竞技场 v5，竞技达人，2022-02-14，竞技，13000</td><td class="col-author">130，正常，130.0</td><td class="col-date">O5P6Q</td></tr>
+<tr><td class="col-id">2024，跑酷挑战赛 v5，跑酷高手，2024-09-05，娱乐，12500</td><td class="col-name">125，正常，125.0</td><td class="col-author">R7S8T</td></tr>
+<tr><td class="col-id">2025</td><td class="col-name">BOSS rush 挑战 v5，副本专家，2023-06-18，娱乐，12000</td><td class="col-author">120，正常，120.0</td><td class="col-date">U9V0W</td></tr>
+<tr><td class="col-id">3001，团队配合训练 1，团队指挥，2023-04-10，技能训练，18000</td><td class="col-name">95，正常，95.0</td><td class="col-author">X1Y2Z</td></tr>
+<tr><td class="col-id">3002，休闲小遊戲 1，游戏制作人，2022-09-22，娱乐，17000</td><td class="col-name">90，正常，90.0</td><td class="col-author">A3B4C</td></tr>
+<tr><td class="col-id">3003，剧情体验图 1，剧情大师，2024-01-05，叙事，16000</td><td class="col-name">85，正常，85.0</td><td class="col-author">D5E6F</td></tr>
+<tr><td class="col-id">3004，战术演练场 1，战术专家，2023-06-18，竞技，15000</td><td class="col-name">80，正常，80.0</td><td class="col-author">G7H8I</td></tr>
+<tr><td class="col-id">3005，团队配合训练 2，团队指挥，2022-11-30，技能训练，14000</td><td class="col-name">75，正常，75.0</td><td class="col-author">J9K0L</td></tr>
+<tr><td class="col-id">3006，休闲小遊戲 2，游戏制作人，2024-03-12，娱乐，13000</td><td class="col-name">70，正常，70.0</td><td class="col-author">M1N2O</td></tr>
+<tr><td class="col-id">3007，剧情体验图 2，剧情大师，2023-08-25，叙事，12000</td><td class="col-name">65，正常，65.0</td><td class="col-author">P3Q4R</td></tr>
+<tr><td class="col-id">3008，战术演练场 2，战术专家，2022-05-08，竞技，11000</td><td class="col-name">60，正常，60.0</td><td class="col-author">S5T6U</td></tr>
+<tr><td class="col-id">3009，团队配合训练 3，团队指挥，2024-07-20，技能训练，10500</td><td class="col-name">58，正常，58.0</td><td class="col-author">V7W8X</td></tr>
+<tr><td class="col-id">3010，休闲小遊戲 3，游戏制作人，2023-02-14，娱乐，10000</td><td class="col-name">55，正常，55.0</td><td class="col-author">Y9Z0A</td></tr>
+<tr><td class="col-id">3011，剧情体验图 3，剧情大师，2022-10-28，叙事，9500</td><td class="col-name">52，正常，52.0</td><td class="col-author">B1C2D</td></tr>
+<tr><td class="col-id">3012，战术演练场 3，战术专家，2024-05-10，竞技，9000</td><td class="col-name">50，正常，50.0</td><td class="col-author">E3F4G</td></tr>
+<tr><td class="col-id">3013，团队配合训练 4，团队指挥，2023-12-22，技能训练，8800</td><td class="col-name">53，正常，53.0</td><td class="col-author">H5I6J</td></tr>
+<tr><td class="col-id">3014，休闲小遊戲 4，游戏制作人，2022-07-05，娱乐，8600</td><td class="col-name">54，正常，54.0</td><td class="col-author">K7L8M</td></tr>
+<tr><td class="col-id">3015，剧情体验图 4，剧情大师，2024-02-18，叙事，8400</td><td class="col-name">51，正常，51.0</td><td class="col-author">N9O0P</td></tr>
+<tr><td class="col-id">3016，战术演练场 4，战术专家，2023-09-30，竞技，8200</td><td class="col-name">52，正常，52.0</td><td class="col-author">Q1R2S</td></tr>
+<tr><td class="col-id">3017，团队配合训练 5，团队指挥，2022-04-12，技能训练，8000</td><td class="col-name">50，正常，50.0</td><td class="col-author">T3U4V</td></tr>
+<tr><td class="col-id">3018，休闲小遊戲 5，游戏制作人，2024-06-25，娱乐，7800</td><td class="col-name">51，正常，51.0</td><td class="col-author">W5X6Y</td></tr>
+<tr><td class="col-id">3019，剧情体验图 5，剧情大师，2023-01-08，叙事，7600</td><td class="col-name">50，正常，50.0</td><td class="col-author">Z7A8B</td></tr>
+<tr><td class="col-id">3020，战术演练场 5，战术专家，2022-08-20，竞技，7400</td><td class="col-name">50，正常，50.0</td><td class="col-author">C9D0E</td></tr>
+<tr><td class="col-id">3021，团队配合训练 6，团队指挥，2024-03-05，技能训练，7200</td><td class="col-name">52，正常，52.0</td><td class="col-author">F1G2H</td></tr>
+<tr><td class="col-id">3022，休闲小遊戲 6，游戏制作人，2023-10-18，娱乐，7000</td><td class="col-name">51，正常，51.0</td><td class="col-author">I3J4K</td></tr>
+<tr><td class="col-id">3023，剧情体验图 6，剧情大师，2022-05-30，叙事，6800</td><td class="col-name">50，正常，50.0</td><td class="col-author">L5M6N</td></tr>
+<tr><td class="col-id">3024，战术演练场 6，战术专家，2024-08-12，竞技，6600</td><td class="col-name">50，正常，50.0</td><td class="col-author">O7P8Q</td></tr>
+<tr><td class="col-id">4001，新手练习图 1，新人作者，2023-03-15，技能训练，4500</td><td class="col-name">45，正常，45.0</td><td class="col-author">R9S0T</td></tr>
+<tr><td class="col-id">4002，创意工坊测试 1，测试员，2022-10-28，娱乐，4200</td><td class="col-name">42，正常，42.0</td><td class="col-author">U1V2W</td></tr>
+<tr><td class="col-id">4003，小型冒险 1，独立开发者，2024-01-10，叙事，4000</td><td class="col-name">40，正常，40.0</td><td class="col-author">X3Y4Z</td></tr>
+<tr><td class="col-id">4004，趣味小游戏 1，休闲玩家，2023-06-22，娱乐，3800</td><td class="col-name">38，正常，38.0</td><td class="col-author">A5B6C</td></tr>
+<tr><td class="col-id">4005，新手练习图 2，新人作者，2022-09-05，技能训练，3600</td><td class="col-name">36，正常，36.0</td><td class="col-author">D7E8F</td></tr>
+<tr><td class="col-id">4006，创意工坊测试 2，测试员，2024-04-18，娱乐，3400</td><td class="col-name">34，正常，34.0</td><td class="col-author">G9H0I</td></tr>
+<tr><td class="col-id">4007，小型冒险 2，独立开发者，2023-11-30，叙事，3200</td><td class="col-name">32，正常，32.0</td><td class="col-author">J1K2L</td></tr>
+<tr><td class="col-id">4008，趣味小游戏 2，休闲玩家，2022-06-12，娱乐，3000</td><td class="col-name">30，正常，30.0</td><td class="col-author">M3N4O</td></tr>
+<tr><td class="col-id">4009，新手练习图 3，新人作者，2024-02-25，技能训练，2800</td><td class="col-name">28，正常，28.0</td><td class="col-author">P5Q6R</td></tr>
+<tr><td class="col-id">4010，创意工坊测试 3，测试员，2023-07-08，娱乐，2600</td><td class="col-name">26，正常，26.0</td><td class="col-author">S7T8U</td></tr>
+<tr><td class="col-id">4011，小型冒险 3，独立开发者，2022-12-20，叙事，2400</td><td class="col-name">24，正常，24.0</td><td class="col-author">V9W0X</td></tr>
+<tr><td class="col-id">4012，趣味小游戏 3，休闲玩家，2024-05-05，娱乐，2200</td><td class="col-name">22，正常，22.0</td><td class="col-author">Y1Z2A</td></tr>
+<tr><td class="col-id">4013，新手练习图 4，新人作者，2023-02-18，技能训练，2000</td><td class="col-name">20，正常，20.0</td><td class="col-author">B3C4D</td></tr>
+<tr><td class="col-id">4014，创意工坊测试 4，测试员，2022-09-30，娱乐，1800</td><td class="col-name">18，正常，18.0</td><td class="col-author">E5F6G</td></tr>
+<tr><td class="col-id">4015，小型冒险 4，独立开发者，2024-06-12，叙事，1600</td><td class="col-name">16，正常，16.0</td><td class="col-author">H7I8J</td></tr>
+<tr><td class="col-id">4016，趣味小游戏 4，休闲玩家，2023-01-25，娱乐，1400</td><td class="col-name">14，正常，14.0</td><td class="col-author">K9L0M</td></tr>
+<tr><td class="col-id">4017，新手练习图 5，新人作者，2022-08-08，技能训练，1200</td><td class="col-name">12，正常，12.0</td><td class="col-author">N1O2P</td></tr>
+<tr><td class="col-id">4018，创意工坊测试 5，测试员，2024-03-20，娱乐，1000</td><td class="col-name">10，正常，10.0</td><td class="col-author">Q3R4S</td></tr>
+<tr><td class="col-id">4019，小型冒险 5，独立开发者，2023-10-05，叙事，900</td><td class="col-name">9，正常，9.0</td><td class="col-author">T5U6V</td></tr>
+<tr><td class="col-id">4020，趣味小游戏 5，休闲玩家，2022-05-18，娱乐，800</td><td class="col-name">8，正常，8.0</td><td class="col-author">W7X8Y</td></tr>
+<tr><td class="col-id">4021，新手练习图 6，新人作者，2024-07-30，技能训练，700</td><td class="col-name">7，正常，7.0</td><td class="col-author">Z9A0B</td></tr>
+<tr><td class="col-id">4022，创意工坊测试 6，测试员，2023-04-12，娱乐，600</td><td class="col-name">6，正常，6.0</td><td class="col-author">C1D2E</td></tr>
+<tr><td class="col-id">4023，小型冒险 6，独立开发者，2022-11-25，叙事，500</td><td class="col-name">5，正常，5.0</td><td class="col-author">F3G4H</td></tr>
+<tr><td class="col-id">4024，趣味小游戏 6，休闲玩家，2024-08-08，娱乐，400</td><td class="col-name">4，正常，4.0</td><td class="col-author">I5J6K</td></tr>
+<tr><td class="col-id">4025，新手练习图 7，新人作者，2023-05-20，技能训练，350</td><td class="col-name">3.5，正常，3.5</td><td class="col-author">L7M8N</td></tr>
+<tr><td class="col-id">4026，创意工坊测试 7，测试员，2022-02-05，娱乐，300</td><td class="col-name">3，正常，3.0</td><td class="col-author">O9P0Q</td></tr>
+<tr><td class="col-id">4027，小型冒险 7，独立开发者，2024-09-18，叙事，280</td><td class="col-name">2.8，正常，2.8</td><td class="col-author">R1S2T</td></tr>
+<tr><td class="col-id">4028，趣味小游戏 7，休闲玩家，2023-12-30，娱乐，260</td><td class="col-name">2.6，正常，2.6</td><td class="col-author">U3V4W</td></tr>
+<tr><td class="col-id">4029，新手练习图 8，新人作者，2022-07-15，技能训练，240</td><td class="col-name">2.4，正常，2.4</td><td class="col-author">X5Y6Z</td></tr>
+<tr><td class="col-id">4030，创意工坊测试 8，测试员，2024-04-28，娱乐，220</td><td class="col-name">2.2，正常，2.2</td><td class="col-author">A7B8C</td></tr>
+</table>
+<p style="margin-top: 20px; font-size: 12px; color: #666;">数据来源：https://www.owmod.net | 生成时间：2026-04-09</p>
+</body>
+</html>

@@ -1,0 +1,232 @@
+{
+  "summary": {
+    "totalSamples": 100,
+    "overallAgreementRate": 93.8,
+    "dimensions": 5
+  },
+  "results": {
+    "技能修改程度": {
+      "agreements": 91,
+      "agreementRate": 91,
+      "kappa": 0.8805796292159929
+    },
+    "地图物件来源": {
+      "agreements": 94,
+      "agreementRate": 94,
+      "kappa": 0.9152426452099571
+    },
+    "机制创新": {
+      "agreements": 93,
+      "agreementRate": 93,
+      "kappa": 0.909052428506582
+    },
+    "视觉创新": {
+      "agreements": 94,
+      "agreementRate": 94,
+      "kappa": 0.9206123410268487
+    },
+    "叙事创新": {
+      "agreements": 97,
+      "agreementRate": 97,
+      "kappa": 0.9600163316582914
+    }
+  },
+  "disagreementDetails": {
+    "技能修改程度": [
+      {
+        "row": 3,
+        "work": "「飞天猫空战」",
+        "coder1": 1,
+        "coder2": 2
+      },
+      {
+        "row": 6,
+        "work": "海克斯乱斗",
+        "coder1": 4,
+        "coder2": 5
+      },
+      {
+        "row": 22,
+        "work": "经典墓园狙房死斗加强版,爆头对枪房",
+        "coder1": 2,
+        "coder2": 1
+      },
+      {
+        "row": 24,
+        "work": "守望塔防PVE V2.1.7",
+        "coder1": 4,
+        "coder2": 3
+      },
+      {
+        "row": 37,
+        "work": "斗地主   二代        v2.6",
+        "coder1": 5,
+        "coder2": 4
+      },
+      {
+        "row": 46,
+        "work": "新悬崖大乱斗，极简版全英雄地形杀！",
+        "coder1": 4,
+        "coder2": 5
+      },
+      {
+        "row": 64,
+        "work": "模拟天梯-竞技规则人机 电脑地推阵容+大锤/小锤/铁拳AI",
+        "coder1": 1,
+        "coder2": 2
+      },
+      {
+        "row": 67,
+        "work": "9平米源氏死斗",
+        "coder1": 1,
+        "coder2": 2
+      },
+      {
+        "row": 96,
+        "work": "怪鼠复仇💰带商店🏆可升级属性💰换英雄",
+        "coder1": 4,
+        "coder2": 2
+      }
+    ],
+    "地图物件来源": [
+      {
+        "row": 9,
+        "work": "漓江塔 1v1【附视频】",
+        "coder1": 1,
+        "coder2": 2
+      },
+      {
+        "row": 56,
+        "work": "《披萨小镇》披萨店模拟经营游戏",
+        "coder1": 5,
+        "coder2": 2
+      },
+      {
+        "row": 59,
+        "work": "源氏激素秒刀练习！",
+        "coder1": 1,
+        "coder2": 3
+      },
+      {
+        "row": 76,
+        "work": "☄🌚末日丧尸世界——硬核求生☄☄（对抗版）",
+        "coder1": 4,
+        "coder2": 2
+      },
+      {
+        "row": 84,
+        "work": "资源大作战",
+        "coder1": 3,
+        "coder2": 1
+      },
+      {
+        "row": 87,
+        "work": "锤僵尸废案",
+        "coder1": 3,
+        "coder2": 1
+      }
+    ],
+    "机制创新": [
+      {
+        "row": 9,
+        "work": "漓江塔 1v1【附视频】",
+        "coder1": 3,
+        "coder2": 2
+      },
+      {
+        "row": 27,
+        "work": "仓鼠答题",
+        "coder1": 4,
+        "coder2": 5
+      },
+      {
+        "row": 34,
+        "work": "尸如潮水PVE超多敌人",
+        "coder1": 4,
+        "coder2": 3
+      },
+      {
+        "row": 46,
+        "work": "新悬崖大乱斗，极简版全英雄地形杀！",
+        "coder1": 2,
+        "coder2": 3
+      },
+      {
+        "row": 67,
+        "work": "9平米源氏死斗",
+        "coder1": 2,
+        "coder2": 1
+      },
+      {
+        "row": 91,
+        "work": "灭除家害(安娜灭虫)",
+        "coder1": 5,
+        "coder2": 2
+      },
+      {
+        "row": 100,
+        "work": "保护总统【实验性分支】",
+        "coder1": 4,
+        "coder2": 2
+      }
+    ],
+    "视觉创新": [
+      {
+        "row": 9,
+        "work": "漓江塔 1v1【附视频】",
+        "coder1": 2,
+        "coder2": 1
+      },
+      {
+        "row": 20,
+        "work": "《四叶草深渊》🍀",
+        "coder1": 5,
+        "coder2": 3
+      },
+      {
+        "row": 49,
+        "work": "守望塔防模拟器V1.3.1",
+        "coder1": 4,
+        "coder2": 2
+      },
+      {
+        "row": 60,
+        "work": "Ghosts-找鬼-地平线月球基地",
+        "coder1": 3,
+        "coder2": 5
+      },
+      {
+        "row": 71,
+        "work": "BOSS人机闯关（宝藏层版本）",
+        "coder1": 4,
+        "coder2": 5
+      },
+      {
+        "row": 80,
+        "work": "生化感染模式_僵尸有护甲 V0.6.2",
+        "coder1": 3,
+        "coder2": 5
+      }
+    ],
+    "叙事创新": [
+      {
+        "row": 27,
+        "work": "仓鼠答题",
+        "coder1": 2,
+        "coder2": 1
+      },
+      {
+        "row": 51,
+        "work": "守望只狼PVE",
+        "coder1": 4,
+        "coder2": 2
+      },
+      {
+        "row": 100,
+        "work": "保护总统【实验性分支】",
+        "coder1": 5,
+        "coder2": 3
+      }
+    ]
+  }
+}

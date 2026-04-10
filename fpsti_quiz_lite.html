@@ -124,7 +124,12 @@
         }
         
         .result { text-align: center; display: none; }
-        .result-icon { font-size: 80px; margin-bottom: 20px; }
+        .result-icon { 
+            width: 120px; 
+            height: 120px; 
+            margin: 0 auto 20px;
+            object-fit: contain;
+        }
         .result-label { font-size: 14px; color: #999; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
         .result-category {
             display: inline-block;
@@ -244,7 +249,7 @@
                 <p class="subtitle">你的 FPS 人格类型是</p>
             </div>
             
-            <div class="result-icon" id="result-icon">🎮</div>
+            <img class="result-icon" id="result-icon" src="" alt="结果图标" />
             <div class="result-label">FPS PERSONALITY TYPE</div>
             <div class="result-category" id="result-category">类型</div>
             <div class="result-type" id="result-type"></div>
@@ -292,22 +297,22 @@
         ];
 
         const results = {
-            "BANG": { icon: "💥", category: "颗秒", title: "BANG↓BANG↓BANG↓BANG↑", desc: "难道你真的是主宰哥" },
-            "LAOLIU": { icon: "🥷", category: "老六", title: "LAOLIU", desc: "草丛里有人，我不玩了" },
-            "ONESHOT": { icon: "🎯", category: "timing 侠", title: "ONE SHOT", desc: "你总能抓住那关键的一枪" },
-            "BABABOOEY": { icon: "🔥", category: "粑粑博弈", title: "BABABOOEY/88BO1", desc: "永远的五五开战神" },
-            "MACARTHUR": { icon: "🎖️", category: "五星上将", title: "MacArthur", desc: "计划有变，准备 xx" },
-            "KKJJHHB": { icon: "🤝", category: "交际者", title: "KKJJHHB", desc: "有我在，团队不结冰" },
-            "DANCE": { icon: "💃", category: "漫游者", title: "↑↓↑→←→←→", desc: "你享受着每一把游戏" },
-            "RUSHB": { icon: "⚡", category: "跑男", title: "RUSH B", desc: "勇敢勇敢我的朋友" },
-            "GOAT": { icon: "🐐", category: "山羊", title: "GOAT", desc: "蘸豆，爽" },
-            "SHRIMP": { icon: "🦐", category: "不是哥们", title: "SHRIMP", desc: "虾头就是你？" },
-            "BRIDGE": { icon: "🌉", category: "乌鲁鲁", title: "BRIDGE-OWNER", desc: "此路是我开，此桥是我裁" },
-            "CALMMIND": { icon: "🧘", category: "抗压王", title: "CALM MIND", desc: "感受我的痛苦" },
-            "STRESSM": { icon: "😤", category: "压力怪", title: "STRESS-M", desc: "你是所有人心中的大山" },
-            "HORSESHOOTER": { icon: "🐴", category: "马枪怪", title: "HORSE-SHOOTER", desc: "妮巧大王同意了" },
-            "HACKER": { icon: "💻", category: "转起来了", title: "HACKER", desc: "你的数据过于异常，已被提交举报" },
-            "VWO10": { icon: "🎭", category: "炫压抑", title: "VWO10", desc: "你玩的不是游戏，是人生" }
+            "BANG": { icon: "人物/颗秒.png", category: "颗秒", title: "BANG↓BANG↓BANG↓BANG↑", desc: "难道你真的是主宰哥" },
+            "LAOLIU": { icon: "人物/老六.png", category: "老六", title: "LAOLIU", desc: "草丛里有人，我不玩了" },
+            "ONESHOT": { icon: "人物/timing 侠.png", category: "timing 侠", title: "ONE SHOT", desc: "你总能抓住那关键的一枪" },
+            "BABABOOEY": { icon: "人物/粑粑博弈.png", category: "粑粑博弈", title: "BABABOOEY/88BO1", desc: "永远的五五开战神" },
+            "MACARTHUR": { icon: "人物/五星上将.png", category: "五星上将", title: "MacArthur", desc: "计划有变，准备 xx" },
+            "KKJJHHB": { icon: "人物/交际者.png", category: "交际者", title: "KKJJHHB", desc: "有我在，团队不结冰" },
+            "DANCE": { icon: "人物/漫游者.png", category: "漫游者", title: "↑↓↑→←→←→", desc: "你享受着每一把游戏" },
+            "RUSHB": { icon: "人物/跑男.png", category: "跑男", title: "RUSH B", desc: "勇敢勇敢我的朋友" },
+            "GOAT": { icon: "人物/山羊.png", category: "山羊", title: "GOAT", desc: "蘸豆，爽" },
+            "SHRIMP": { icon: "人物/不是哥们.png", category: "不是哥们", title: "SHRIMP", desc: "虾头就是你？" },
+            "BRIDGE": { icon: "人物/乌鲁鲁.png", category: "乌鲁鲁", title: "BRIDGE-OWNER", desc: "此路是我开，此桥是我裁" },
+            "CALMMIND": { icon: "人物/抗压王.png", category: "抗压王", title: "CALM MIND", desc: "感受我的痛苦" },
+            "STRESSM": { icon: "人物/压力怪.png", category: "压力怪", title: "STRESS-M", desc: "你是所有人心中的大山" },
+            "HORSESHOOTER": { icon: "人物/马枪怪.png", category: "马枪怪", title: "HORSE-SHOOTER", desc: "妮巧大王同意了" },
+            "HACKER": { icon: "人物/转起来了.png", category: "转起来了", title: "HACKER", desc: "你的数据过于异常，已被提交举报" },
+            "VWO10": { icon: "人物/炫压抑.png", category: "炫压抑", title: "VWO10", desc: "你玩的不是游戏，是人生" }
         };
 
         let currentQuestion = 0;
@@ -361,7 +366,8 @@
             const resultType = calculateResult();
             const result = results[resultType];
             
-            document.getElementById('result-icon').textContent = result.icon;
+            document.getElementById('result-icon').src = result.icon;
+            document.getElementById('result-icon').alt = result.category;
             document.getElementById('result-category').textContent = result.category;
             document.getElementById('result-type').textContent = result.title;
             document.getElementById('result-desc').textContent = result.desc;

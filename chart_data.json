@@ -1,0 +1,56 @@
+{
+  "agreementRates": [
+    {
+      "dimension": "技能修改程度",
+      "agreementRate": 91,
+      "agreements": 91,
+      "disagreements": 9
+    },
+    {
+      "dimension": "地图物件来源",
+      "agreementRate": 94,
+      "agreements": 94,
+      "disagreements": 6
+    },
+    {
+      "dimension": "机制创新",
+      "agreementRate": 93,
+      "agreements": 93,
+      "disagreements": 7
+    },
+    {
+      "dimension": "视觉创新",
+      "agreementRate": 94,
+      "agreements": 94,
+      "disagreements": 6
+    },
+    {
+      "dimension": "叙事创新",
+      "agreementRate": 97,
+      "agreements": 97,
+      "disagreements": 3
+    }
+  ],
+  "kappaValues": [
+    {
+      "dimension": "技能修改程度",
+      "kappa": 0.8806
+    },
+    {
+      "dimension": "地图物件来源",
+      "kappa": 0.9152
+    },
+    {
+      "dimension": "机制创新",
+      "kappa": 0.9091
+    },
+    {
+      "dimension": "视觉创新",
+      "kappa": 0.9206
+    },
+    {
+      "dimension": "叙事创新",
+      "kappa": 0.96
+    }
+  ]
+}

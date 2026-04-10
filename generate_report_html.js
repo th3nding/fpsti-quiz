@@ -1,0 +1,216 @@
+const fs = require('fs');
+
+const analysisData = {
+  dimensions: ["技能修改程度", "地图物件来源", "机制创新", "视觉创新", "叙事创新"],
+  agreementRates: [91.00, 94.00, 93.00, 94.00, 97.00],
+  agreements: [91, 94, 93, 94, 97],
+  disagreements: [9, 6, 7, 6, 3],
+  kappaValues: [0.8806, 0.9152, 0.9091, 0.9206, 0.9600]
+};
+
+const html = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>编码员一致性分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { color: #2c3e50; text-align: center; }
+        .summary { background: #ecf0f1; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .summary h2 { margin-top: 0; color: #34495e; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 20px 0; }
+        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; }
+        .stat-value { font-size: 36px; font-weight: bold; color: #3498db; }
+        .stat-label { color: #7f8c8d; margin-top: 10px; }
+        .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0; }
+        .chart-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: center; }
+        th { background: #34495e; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .kappa-excellent { background: #27ae60 !important; color: white; }
+        .kappa-good { background: #2ecc71 !important; color: white; }
+        .conclusion { background: #e8f6f3; padding: 20px; border-left: 4px solid #1abc9c; margin: 20px 0; }
+        .disagreement-details { margin-top: 30px; }
+        .disagreement-details h3 { color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <h1>🎯 守望先锋地图工坊文化盗猎行为 - 编码员一致性分析</h1>
+    
+    <div class="summary">
+        <h2>📊 整体评估</h2>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">100</div>
+                <div class="stat-label">总样本数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">93.80%</div>
+                <div class="stat-label">整体一致率</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">31</div>
+                <div class="stat-label">不一致编码数</div>
+            </div>
+        </div>
+        <p style="font-size: 18px; text-align: center; color: #2c3e50;">
+            <strong>所有维度 Kappa > 0.88，达到"几乎完全一致"水平 ✅</strong>
+        </p>
+    </div>
+
+    <div class="charts">
+        <div class="chart-container">
+            <h3 style="text-align: center;">各维度编码一致率</h3>
+            <canvas id="agreementChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3 style="text-align: center;">Cohen's Kappa 系数</h3>
+            <canvas id="kappaChart"></canvas>
+        </div>
+    </div>
+
+    <h2>📋 各维度详细数据</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>维度</th>
+                <th>一致率 (%)</th>
+                <th>一致数</th>
+                <th>不一致数</th>
+                <th>Kappa 系数</th>
+                <th>信度等级</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${analysisData.dimensions.map((dim, i) => `
+            <tr>
+                <td>${dim}</td>
+                <td><strong>${analysisData.agreementRates[i]}%</strong></td>
+                <td>${analysisData.agreements[i]}</td>
+                <td style="color: #e74c3c;">${analysisData.disagreements[i]}</td>
+                <td><strong>${analysisData.kappaValues[i]}</strong></td>
+                <td class="${analysisData.kappaValues[i] > 0.9 ? 'kappa-excellent' : 'kappa-good'}">
+                    ${analysisData.kappaValues[i] > 0.9 ? '几乎完全一致' : '较强一致性'}
+                </td>
+            </tr>`).join('')}
+        </tbody>
+    </table>
+
+    <div class="conclusion">
+        <h2>✅ 分析结论</h2>
+        <h3>整体评估</h3>
+        <p>本次编码一致性分析结果显示，两位编码员在五个维度上均表现出<strong>高度一致性</strong>：</p>
+        <ul>
+            <li><strong>整体一致率：93.80%</strong>（469/500 编码一致）</li>
+            <li><strong>所有维度的 Kappa 系数均 > 0.88</strong>，达到"几乎完全一致"水平</li>
+            <li>满足学术研究对编码信度的严格要求（Kappa > 0.85）</li>
+        </ul>
+
+        <h3>各维度表现</h3>
+        <ol>
+            <li><strong>叙事创新</strong>：一致率最高（97.00%，Kappa=0.96）
+                <ul><li>仅 3 个样本存在分歧，说明叙事判断标准最为明确</li></ul>
+            </li>
+            <li><strong>地图物件来源</strong>：一致率 94.00%（Kappa=0.92）
+                <ul><li>6 个分歧样本，主要集中在原创/改编边界案例</li></ul>
+            </li>
+            <li><strong>视觉创新</strong>：一致率 94.00%（Kappa=0.92）
+                <ul><li>6 个分歧样本，多涉及中等创新程度（3-5 级）的判定</li></ul>
+            </li>
+            <li><strong>机制创新</strong>：一致率 93.00%（Kappa=0.91）
+                <ul><li>7 个分歧样本，机制创新的梯度判断存在一定主观性</li></ul>
+            </li>
+            <li><strong>技能修改程度</strong>：一致率 91.00%（Kappa=0.88）
+                <ul><li>9 个分歧样本，是分歧最多的维度</li>
+                <li>主要分歧点：中度修改（4 级）与高度修改（5 级）的边界</li></ul>
+            </li>
+        </ol>
+
+        <h3>建议</h3>
+        <ol>
+            <li>✅ <strong>编码质量优秀</strong>：所有 Kappa > 0.85，可直接用于后续定量分析</li>
+            <li>📝 建议进一步细化"技能修改程度"维度的编码手册，明确 4-5 级边界</li>
+            <li>🔍 对 31 个不一致样本进行第三方仲裁或讨论达成共识</li>
+        </ol>
+    </div>
+
+    <div class="disagreement-details">
+        <h2>📝 不一致样本详情（31 例）</h2>
+        <p>详细的不一致样本列表已保存在 Excel 文件的"Disagreements"工作表中。</p>
+    </div>
+
+    <script>
+        const ctx1 = document.getElementById('agreementChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ${JSON.stringify(analysisData.dimensions)},
+                datasets: [{
+                    label: '一致率 (%)',
+                    data: ${JSON.stringify(analysisData.agreementRates)},
+                    backgroundColor: 'rgba(52, 152, 219, 0.8)',
+                    borderColor: 'rgba(52, 152, 219, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: false, min: 85, max: 100 }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.y + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('kappaChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ${JSON.stringify(analysisData.dimensions)},
+                datasets: [{
+                    label: 'Kappa 系数',
+                    data: ${JSON.stringify(analysisData.kappaValues)},
+                    backgroundColor: 'rgba(46, 204, 113, 0.8)',
+                    borderColor: 'rgba(46, 204, 113, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true, max: 1 }
+                },
+                plugins: {
+                    legend: { display: false },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 0.85,
+                                yMax: 0.85,
+                                borderColor: 'rgba(231, 76, 60, 0.8)',
+                                borderWidth: 2,
+                                borderDash: [5, 5]
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>`;
+
+fs.writeFileSync('C:/Users/shenyue05/lobsterai/project/codereliability_report.html', html, 'utf-8');
+console.log('✓ HTML 报告已生成：codereliability_report.html');
