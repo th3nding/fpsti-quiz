@@ -399,7 +399,7 @@
             if (aRatio >= 0.9) return 'HACKER';
             
             const ratios = [aRatio, bRatio, cRatio, dRatio].sort(function(x, y) { return y - x; });
-            // VWO10: A 30-50%, B 20-40%, C⏰5%, D⏰5%, 且没有任何选项超过 50%
+            // VWO10: A 30-50%, B 20-40%, C≥15%, D≥15%, 且没有任何选项超过 50%
             if (aRatio >= 0.3 && aRatio < 0.5 && 
                 bRatio >= 0.2 && bRatio <= 0.4 && 
                 cRatio >= 0.15 && 
