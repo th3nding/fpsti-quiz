@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPSTI - FPS 人格测试</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container { max-width: 700px; width: 100%; }
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 {
+            font-size: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle { color: #666; font-size: 18px; }
+        .tagline { color: #999; font-size: 15px; margin-top: 10px; font-style: italic; }
+        
+        .intro {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+        .intro p { color: #555; font-size: 16px; line-height: 1.8; margin: 8px 0; }
+        .intro-highlight {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px !important;
+        }
+        
+        .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0; }
+        .feature {
+            padding: 20px;
+            background: #f8f9fc;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .feature-icon { font-size: 40px; margin-bottom: 10px; }
+        .feature-text { color: #333; font-size: 15px; font-weight: 600; }
+        
+        .progress { margin-bottom: 30px; }
+        .progress-bar { width: 100%; height: 8px; background: #e8e8e8; border-radius: 4px; overflow: hidden; }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        .progress-text { text-align: center; color: #888; font-size: 14px; margin-top: 10px; }
+        
+        .question-number {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .question-text { font-size: 26px; color: #1a1a2e; margin-bottom: 30px; font-weight: 700; line-height: 1.4; }
+        
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option {
+            padding: 18px 24px;
+            background: #f8f9fc;
+            border: 2px solid #e3e6ef;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .option:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateX(10px);
+        }
+        .option.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+            transform: translateX(10px);
+        }
+        .option-letter {
+            font-weight: 700;
+            font-size: 18px;
+            min-width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(102, 126, 234, 0.15);
+            border-radius: 50%;
+        }
+        .option:hover .option-letter, .option.selected .option-letter {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        
+        .result { text-align: center; display: none; }
+        .result-icon { font-size: 80px; margin-bottom: 20px; }
+        .result-label { font-size: 14px; color: #999; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .result-category {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            letter-spacing: 3px;
+        }
+        .result-type {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #f0f0f5;
+            color: #555;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            border: 2px solid #e0e0e8;
+        }
+        .result-title { font-size: 22px; color: #1a1a2e; margin-bottom: 20px; font-weight: 600; }
+        .result-desc { font-size: 16px; color: #666; line-height: 1.8; margin-bottom: 30px; }
+        
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fc;
+            border-radius: 16px;
+        }
+        .stat { text-align: center; }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label { font-size: 12px; color: #999; margin-top: 6px; }
+        
+        .btn {
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4); }
+        .start-btn { width: 100%; padding: 20px; font-size: 22px; margin-top: 30px; }
+        
+        .hidden { display: none; }
+        .disclaimer { text-align: center; color: #aaa; font-size: 13px; margin-top: 25px; padding-top: 20px; border-top: 1px solid #eee; }
+        
+        @media (max-width: 600px) {
+            .card { padding: 25px; }
+            .header h1 { font-size: 36px; }
+            .question-text { font-size: 20px; }
+            .features { grid-template-columns: 1fr; }
+            .result-category { font-size: 28px; padding: 14px 35px; }
+            .result-type { font-size: 18px; padding: 10px 25px; }
+            .result-stats { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="start-page">
+            <div class="header">
+                <h1>🎮 FPSTI</h1>
+                <p class="subtitle">FPS 人格类型指标测试</p>
+                <p class="tagline">给你一面镜子，你敢照吗？</p>
+            </div>
+            
+            <div class="intro">
+                <p class="intro-highlight">本测试将揭示你在 FPS 游戏中的真实人格</p>
+                <p>共 25 道场景化题目</p>
+                <p>14 种普通类型 + 2 种隐藏类型</p>
+            </div>
+
+            <div class="features">
+                <div class="feature"><div class="feature-icon">🎯</div><div class="feature-text">25 道原创题目</div></div>
+                <div class="feature"><div class="feature-icon">🏆</div><div class="feature-text">16 种结果</div></div>
+                <div class="feature"><div class="feature-icon">⚡</div><div class="feature-text">3 分钟完成</div></div>
+                <div class="feature"><div class="feature-icon">🎭</div><div class="feature-text">纯娱乐</div></div>
+            </div>
+            
+            <button class="btn start-btn" onclick="startTest()">开始测试</button>
+            <p class="disclaimer">* 测试仅限娱乐，无任何科学依据</p>
+        </div>
+
+        <div class="card hidden" id="quiz-page">
+            <div class="progress">
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                <div class="progress-text" id="progress-text">Q1 / 25</div>
+            </div>
+            <div class="question">
+                <div class="question-number" id="question-number">QUESTION 01</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options" id="options"></div>
+            </div>
+        </div>
+
+        <div class="card result" id="result-page">
+            <div class="header">
+                <h1>🎉 测试完成</h1>
+                <p class="subtitle">你的 FPS 人格类型是</p>
+            </div>
+            
+            <div class="result-icon" id="result-icon">🎮</div>
+            <div class="result-label">FPS PERSONALITY TYPE</div>
+            <div class="result-category" id="result-category">类型</div>
+            <div class="result-type" id="result-type"></div>
+            <div class="result-desc" id="result-desc"></div>
+            
+            <div class="result-stats">
+                <div class="stat"><div class="stat-value" id="stat-total">25</div><div class="stat-label">总题数</div></div>
+                <div class="stat"><div class="stat-value" id="stat-a">0</div><div class="stat-label">A</div></div>
+                <div class="stat"><div class="stat-value" id="stat-b">0</div><div class="stat-label">B</div></div>
+                <div class="stat"><div class="stat-value" id="stat-c">0</div><div class="stat-label">C</div></div>
+                <div class="stat"><div class="stat-value" id="stat-d">0</div><div class="stat-label">D</div></div>
+            </div>
+            
+            <button class="btn" onclick="restartTest()">重新测试</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { text: "开局第一波交火，你的第一反应是？", options: ["直接拉出去刚，枪线必须压过对面", "找个角落架枪，等他们自己撞上来", "等队友先上，我找机会补枪", "报点指挥，让队友知道敌人在哪"] },
+            { text: "残局 1v3，还剩 30 秒，你会？", options: ["主动出击，逐个击破", "找个阴位等他们来找我", "假装下包骗他们出来", "冷静分析，等时间耗尽"] },
+            { text: "队友说你太菜了，你怎么回应？", options: ["来，1v1 单挑，看看谁菜", "不说话，默默屏蔽", "你行你上啊", "我的我的，下一把"] },
+            { text: "遇到对面有人一直蹲同一个点，你会？", options: ["直接 pre-fire 把他秒了", "绕后偷他屁股", "叫队友一起把他逼出来", "不管他，绕过去打其他人"] },
+            { text: "你的定位是？", options: ["队伍主 C，carry 全场", "自由人，想干嘛干嘛", "辅助位，配合队友", "指挥位，大脑担当"] },
+            { text: "比赛输了，你觉得主要原因是？", options: ["我手感不好，没 carry 起来", "队友太菜了，带不动", "对面太强了，没办法", "战术执行有问题"] },
+            { text: "你最喜欢的击杀方式是？", options: ["正面刚枪，硬实力碾压", "老六阴人，出其不意", "timing 完美，恰到好处", "团队配合，集火秒掉"] },
+            { text: "遇到逆风局，你的心态是？", options: ["我能翻盘，相信我", "算了，下一把吧", "稳住，慢慢打", "开始压力队友"] },
+            { text: "你怎么看待'战术'这件事？", options: ["战术是什么？能吃吗？", "战术就是蹲点阴人", "战术很重要，但要随机应变", "战术至上，严格执行"] },
+            { text: "队友失误了，你会？", options: ["没关系，我来 carry", "笑死，这都能死", "没事，下次注意", "？？？你在干什么"] },
+            { text: "你打游戏的时间大概是？", options: ["每天 8 小时+", "有空就玩", "周末玩玩", "偶尔娱乐"] },
+            { text: "你的 KD 大概是？", options: ["2.0+", "1.5 左右", "1.0 左右", "不重要"] },
+            { text: "遇到对面有人嘲讽你，你会？", options: ["直接打爆他的头", "不理他，继续阴他", "叫队友一起抓他", "屏蔽，专注游戏"] },
+            { text: "你最喜欢的地图位置是？", options: ["中路，正面刚", "小道，可以绕后", "包点，可以防守", "高处，可以架枪"] },
+            { text: "你怎么看待'压力'？", options: ["压力就是动力", "压力太大了，顶不住", "还行，能接受", "我就是压力本身"] },
+            { text: "你的游戏目标是？", options: ["上分，打到最高段位", "开心就好", "练技术，变强", "社交，认识朋友"] },
+            { text: "遇到对面有人打得特别好，你会？", options: ["针对他，把他打服", "避开他，打其他人", "学习他，模仿他的打法", "加好友，以后一起玩"] },
+            { text: "你的沟通方式是？", options: ["简短有力，报点精准", "能不说就不说", "话痨，不停地说", "压力型指挥"] },
+            { text: "你觉得自己是？", options: ["天才少年，天赋异禀", "努力型选手，勤能补拙", "普通玩家，开心就好", "老玩家，经验丰富"] },
+            { text: "你怎么看待'版本'？", options: ["版本是什么？我只玩我喜欢的", "跟着版本走，哪个强玩哪个", "研究版本，找出最优解", "等削弱，太强的英雄没意思"] },
+            { text: "你的设备是？", options: ["顶级配置，144Hz+", "主流配置，够用就行", "笔记本，能玩就好", "主机玩家"] },
+            { text: "遇到外挂，你会？", options: ["直接举报，然后下一把", "录屏取证，详细举报", "退游戏，今天不玩了", "开更大，谁怕谁"] },
+            { text: "你怎么看待'电竞'？", options: ["我就是职业哥水平", "看看比赛，学学技术", "不感兴趣", "想打职业"] },
+            { text: "你的游戏消费习惯是？", options: ["皮肤全买，必须好看", "只买喜欢的", "原皮战神", "等免费活动"] },
+            { text: "最后，用一句话形容你的游戏风格：", options: ["枪刚话狠", "猥琐发育", "团队至上", "快乐游戏"] }
+        ];
+
+        const results = {
+            "BANG": { icon: "💥", category: "颗秒", title: "BANG↓BANG↓BANG↓BANG↑", desc: "难道你真的是主宰哥" },
+            "LAOLIU": { icon: "🥷", category: "老六", title: "LAOLIU", desc: "草丛里有人，我不玩了" },
+            "ONESHOT": { icon: "🎯", category: "timing 侠", title: "ONE SHOT", desc: "你总能抓住那关键的一枪" },
+            "BABABOOEY": { icon: "🔥", category: "粑粑博弈", title: "BABABOOEY/88BO1", desc: "永远的五五开战神" },
+            "MACARTHUR": { icon: "🎖️", category: "五星上将", title: "MacArthur", desc: "计划有变，准备 xx" },
+            "KKJJHHB": { icon: "🤝", category: "交际者", title: "KKJJHHB", desc: "有我在，团队不结冰" },
+            "DANCE": { icon: "💃", category: "漫游者", title: "↑↓↑→←→←→", desc: "你享受着每一把游戏" },
+            "RUSHB": { icon: "⚡", category: "跑男", title: "RUSH B", desc: "勇敢勇敢我的朋友" },
+            "GOAT": { icon: "🐐", category: "山羊", title: "GOAT", desc: "蘸豆，爽" },
+            "SHRIMP": { icon: "🦐", category: "不是哥们", title: "SHRIMP", desc: "虾头就是你？" },
+            "BRIDGE": { icon: "🌉", category: "乌鲁鲁", title: "BRIDGE-OWNER", desc: "此路是我开，此桥是我裁" },
+            "CALMMIND": { icon: "🧘", category: "抗压王", title: "CALM MIND", desc: "感受我的痛苦" },
+            "STRESSM": { icon: "😤", category: "压力怪", title: "STRESS-M", desc: "你是所有人心中的大山" },
+            "HORSESHOOTER": { icon: "🐴", category: "马枪怪", title: "HORSE-SHOOTER", desc: "妮巧大王同意了" },
+            "HACKER": { icon: "💻", category: "转起来了", title: "HACKER", desc: "你的数据过于异常，已被提交举报" },
+            "VWO10": { icon: "🎭", category: "炫压抑", title: "VWO10", desc: "你玩的不是游戏，是人生" }
+        };
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function startTest() {
+            document.getElementById('start-page').classList.add('hidden');
+            document.getElementById('quiz-page').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question-number').textContent = 'QUESTION ' + String(currentQuestion + 1).padStart(2, '0');
+            document.getElementById('question-text').textContent = q.text;
+            
+            const optionsHtml = q.options.map((opt, i) => 
+                '<div class="option" onclick="selectOption(' + i + ')">' +
+                '<span class="option-letter">' + String.fromCharCode(65 + i) + '</span>' +
+                '<span>' + opt + '</span></div>'
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            const progress = (currentQuestion / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = 'Q' + (currentQuestion + 1) + ' / ' + questions.length;
+        }
+
+        function selectOption(index) {
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                if (i === index) opt.classList.add('selected');
+            });
+            
+            answers.push(index);
+            
+            setTimeout(function() {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 300);
+        }
+
+        function showResult() {
+            document.getElementById('quiz-page').classList.add('hidden');
+            document.getElementById('result-page').style.display = 'block';
+            
+            const resultType = calculateResult();
+            const result = results[resultType];
+            
+            document.getElementById('result-icon').textContent = result.icon;
+            document.getElementById('result-category').textContent = result.category;
+            document.getElementById('result-type').textContent = result.title;
+            document.getElementById('result-desc').textContent = result.desc;
+            
+            const aCount = answers.filter(a => a === 0).length;
+            const bCount = answers.filter(a => a === 1).length;
+            const cCount = answers.filter(a => a === 2).length;
+            const dCount = answers.filter(a => a === 3).length;
+            
+            document.getElementById('stat-a').textContent = aCount;
+            document.getElementById('stat-b').textContent = bCount;
+            document.getElementById('stat-c').textContent = cCount;
+            document.getElementById('stat-d').textContent = dCount;
+        }
+
+        function calculateResult() {
+            const aCount = answers.filter(a => a === 0).length;
+            const bCount = answers.filter(a => a === 1).length;
+            const cCount = answers.filter(a => a === 2).length;
+            const dCount = answers.filter(a => a === 3).length;
+            const total = answers.length;
+            const aRatio = aCount / total;
+            const bRatio = bCount / total;
+            const cRatio = cCount / total;
+            const dRatio = dCount / total;
+            
+            if (aRatio >= 0.9) return 'HACKER';
+            
+            const ratios = [aRatio, bRatio, cRatio, dRatio].sort(function(x, y) { return y - x; });
+            // VWO10: A 30-50%, B 20-40%, C≥15%, D≥15%, 且没有任何选项超过 50%
+            if (aRatio >= 0.3 && aRatio < 0.5 && 
+                bRatio >= 0.2 && bRatio <= 0.4 && 
+                cRatio >= 0.15 && 
+                dRatio >= 0.15 && 
+                ratios[0] < 0.5) {
+                return 'VWO10';
+            }
+            
+            if (aRatio >= 0.6) return (dRatio >= 0.2) ? 'GOAT' : 'BANG';
+            if (bRatio >= 0.5) {
+                if (aRatio >= 0.3) return 'BABABOOEY';
+                if (dRatio >= 0.2) return 'BRIDGE';
+                return 'LAOLIU';
+            }
+            if (cRatio >= 0.4 || dRatio >= 0.4) {
+                if (dRatio >= cRatio) return (aRatio >= 0.3) ? 'MACARTHUR' : 'KKJJHHB';
+                if (bRatio >= 0.3) return 'ONESHOT';
+                return 'CALMMIND';
+            }
+            
+            if (aRatio >= 0.4 && bRatio >= 0.3) return 'RUSHB';
+            if (bRatio >= 0.3 && cRatio >= 0.3) return 'HORSESHOOTER';
+            if (cRatio >= 0.3 && dRatio >= 0.3) return 'DANCE';
+            if (aRatio >= 0.3 && dRatio >= 0.3) return 'STRESSM';
+            if (aRatio >= 0.35) return 'SHRIMP';
+            return 'DANCE';
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('result-page').style.display = 'none';
+            document.getElementById('start-page').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
